@@ -73,4 +73,233 @@ function render(d){scheduleTitle.textContent=d.title||"जल्द ही न�
 function loadSaved(){try{let d=JSON.parse(localStorage.getItem("auraGamingHubUpdates")||"null");if(!d){toast("अभी कोई saved update नहीं है");return}platformSelect.value=d.platform||"YouTube";liveTitleInput.value=d.title||"";liveDescInput.value=d.description||"";liveDateInput.value=d.date||"";liveTimeInput.value=d.time||"";videoUpdatesInput.value=(d.videos||[]).join("\n");aboutInput.value=(d.about||[]).join("\n");render(d);toast("Saved update लोड हो गई ✓")}catch(e){toast("Update लोड नहीं हुई")}}
 function clearUpdates(){if(ownerPin.value!=="ARIF8055"){toast("Owner PIN सही नहीं है");return}localStorage.removeItem("auraGamingHubUpdates");render({});toast("इस browser की saved update हटा दी गई")}
 try{let d=JSON.parse(localStorage.getItem("auraGamingHubUpdates")||"null");if(d)render(d)}catch(e){}
-</script></body></html>
+</script>
+
+  
+<!-- AURA GAMES - NEON ANIMATION UPGRADE -->
+<style>
+:root {
+  --aura-blue: #00e5ff;
+  --aura-purple: #8b5cf6;
+}
+
+/* Dark cinematic background */
+body {
+  background:
+    radial-gradient(ellipse at 50% 5%, #07375b 0%, transparent 40%),
+    radial-gradient(ellipse at 90% 50%, #180b39 0%, transparent 35%),
+    radial-gradient(ellipse at 5% 85%, #062a40 0%, transparent 35%),
+    #03050c !important;
+  background-attachment: fixed !important;
+}
+
+/* Glowing heading */
+.hero h1 {
+  background: linear-gradient(
+    100deg, #fff, #83f4ff, #fff, #b69aff
+  );
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: auraShine 6s linear infinite;
+}
+
+@keyframes auraShine {
+  to { background-position: 250% center; }
+}
+
+/* Keep original logo, improve glow */
+.logoShell {
+  filter: drop-shadow(0 0 16px #00e5ff55);
+}
+
+.logo {
+  transition: filter .4s ease;
+}
+
+.logo:hover {
+  filter: brightness(1.2) saturate(1.25);
+}
+
+/* Platform card upgrades */
+.socialGrid .card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #254760;
+  background: linear-gradient(
+    135deg, #101b30, #070b16 75%
+  );
+  box-shadow: 0 10px 25px #0005;
+}
+
+.socialGrid .card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 25%,
+    #00e5ff16 50%,
+    transparent 75%
+  );
+  transform: translateX(-130%);
+  transition: transform .7s ease;
+  pointer-events: none;
+}
+
+.socialGrid .card:hover::before {
+  transform: translateX(130%);
+}
+
+.socialGrid .card:hover {
+  border-color: #00e5ff !important;
+  box-shadow:
+    0 15px 35px #0009,
+    0 0 22px #00e5ff33;
+}
+
+/* Animated buttons */
+.btn, .quick a {
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    border-color .25s ease;
+}
+
+.btn:hover, .quick a:hover {
+  transform: translateY(-4px) scale(1.025);
+  box-shadow: 0 0 20px #00e5ff30;
+}
+
+.btn:active, .quick a:active {
+  transform: scale(.95);
+}
+
+/* Glow for upcoming live */
+.livePanel {
+  border: 1px solid #00e5ff55;
+  box-shadow: 0 0 30px #00e5ff0c;
+}
+
+.liveLabel {
+  animation: liveGlow 2s ease-in-out infinite;
+}
+
+@keyframes liveGlow {
+  50% {
+    text-shadow: 0 0 15px #ff376b;
+  }
+}
+
+/* Directional entry animations */
+.aura-enter {
+  opacity: 0 !important;
+  animation: none !important;
+  transition:
+    opacity .8s ease,
+    translate .8s cubic-bezier(.2,.8,.2,1),
+    scale .8s ease !important;
+}
+
+.aura-enter[data-direction="left"] {
+  translate: -65px 0;
+}
+.aura-enter[data-direction="right"] {
+  translate: 65px 0;
+}
+.aura-enter[data-direction="top"] {
+  translate: 0 -65px;
+}
+.aura-enter[data-direction="bottom"] {
+  translate: 0 65px;
+}
+
+.aura-enter.aura-visible {
+  opacity: 1 !important;
+  translate: 0 0 !important;
+}
+
+@media (max-width: 650px) {
+  .aura-enter[data-direction="left"] {
+    translate: -24px 0;
+  }
+  .aura-enter[data-direction="right"] {
+    translate: 24px 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aura-enter {
+    opacity: 1 !important;
+    translate: none !important;
+    transition: none !important;
+  }
+}
+</style>
+
+<script>
+(() => {
+  const directions = [
+    "left", "right", "top", "bottom"
+  ];
+
+  const selector = [
+    ".socialGrid .card",
+    ".quick a",
+    ".aboutItem",
+    ".videoUpdate",
+    ".sectionHead",
+    ".livePanel"
+  ].join(",");
+
+  const reduceMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (reduceMotion) return;
+
+  const observer = "IntersectionObserver" in window
+    ? new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("aura-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.08,
+        rootMargin: "0px 0px -20px 0px"
+      })
+    : null;
+
+  function animateElements() {
+    document.querySelectorAll(selector).forEach((el, i) => {
+      if (el.dataset.auraReady) return;
+
+      el.dataset.auraReady = "yes";
+      el.dataset.direction =
+        directions[i % directions.length];
+
+      el.classList.add("aura-enter");
+
+      if (observer) {
+        observer.observe(el);
+      } else {
+        el.classList.add("aura-visible");
+      }
+    });
+  }
+  animateElements();
+  // Supports newly added live updates
+  const watch = new MutationObserver(() => {
+    animateElements();
+  });
+  watch.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+})();
+</script>
+<!-- END AURA ANIMATION UPGRADE -->
+</body></html>
