@@ -76,230 +76,1570 @@ try{let d=JSON.parse(localStorage.getItem("auraGamingHubUpdates")||"null");if(d)
 </script>
 
   
-<!-- AURA GAMES - NEON ANIMATION UPGRADE -->
+<!-- =========================================================
+     AURA GAMES 01 — PRO GAMING WEBSITE ANIMATION V2
+     Paste this code BEFORE </body>
+========================================================= -->
+
 <style>
-:root {
-  --aura-blue: #00e5ff;
-  --aura-purple: #8b5cf6;
+
+/* =========================================================
+   1. AURA PRO THEME
+========================================================= */
+
+:root{
+  --aura-bg:#02050b;
+  --aura-bg2:#06101c;
+  --aura-panel:#08111f;
+  --aura-panel2:#0b1728;
+
+  --aura-cyan:#00e5ff;
+  --aura-blue:#008cff;
+  --aura-purple:#8b5cf6;
+
+  --aura-text:#f5fbff;
+  --aura-muted:#9dafc5;
+
+  --aura-border:rgba(0,229,255,.18);
+  --aura-glow:rgba(0,229,255,.18);
 }
 
-/* Dark cinematic background */
-body {
+
+/* =========================================================
+   2. SMOOTH WEBSITE
+========================================================= */
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
   background:
-    radial-gradient(ellipse at 50% 5%, #07375b 0%, transparent 40%),
-    radial-gradient(ellipse at 90% 50%, #180b39 0%, transparent 35%),
-    radial-gradient(ellipse at 5% 85%, #062a40 0%, transparent 35%),
-    #03050c !important;
-  background-attachment: fixed !important;
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(0,140,255,.16),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 100% 45%,
+      rgba(139,92,246,.08),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 0% 75%,
+      rgba(0,229,255,.07),
+      transparent 28%
+    ),
+    #02050b !important;
+
+  background-attachment:scroll !important;
+  overflow-x:hidden;
 }
 
-/* Glowing heading */
-.hero h1 {
-  background: linear-gradient(
-    100deg, #fff, #83f4ff, #fff, #b69aff
-  );
-  background-size: 250% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: auraShine 6s linear infinite;
+
+/* =========================================================
+   3. LIGHTWEIGHT BACKGROUND GLOW
+========================================================= */
+
+body::after{
+  content:"";
+  position:fixed;
+
+  width:500px;
+  height:500px;
+
+  left:50%;
+  top:25%;
+
+  transform:translate(-50%,-50%);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(0,229,255,.07),
+      transparent 68%
+    );
+
+  pointer-events:none;
+  z-index:-1;
+
+  animation:auraBackgroundGlow 9s ease-in-out infinite;
 }
 
-@keyframes auraShine {
-  to { background-position: 250% center; }
+@keyframes auraBackgroundGlow{
+
+  0%,100%{
+    opacity:.45;
+    transform:
+      translate(-50%,-50%)
+      scale(.9);
+  }
+
+  50%{
+    opacity:.8;
+    transform:
+      translate(-50%,-50%)
+      scale(1.08);
+  }
+
 }
 
-/* Keep original logo, improve glow */
-.logoShell {
-  filter: drop-shadow(0 0 16px #00e5ff55);
+
+/* =========================================================
+   4. HERO AREA
+========================================================= */
+
+.hero{
+  position:relative;
+  z-index:1;
 }
 
-.logo {
-  transition: filter .4s ease;
+.hero h1{
+
+  background:
+    linear-gradient(
+      100deg,
+      #ffffff,
+      #8af5ff,
+      #ffffff,
+      #9dc7ff
+    );
+
+  background-size:250% 100%;
+
+  -webkit-background-clip:text;
+  background-clip:text;
+
+  -webkit-text-fill-color:transparent;
+
+  animation:
+    auraTitleShine 7s linear infinite;
 }
 
-.logo:hover {
-  filter: brightness(1.2) saturate(1.25);
+@keyframes auraTitleShine{
+
+  from{
+    background-position:-150% center;
+  }
+
+  to{
+    background-position:150% center;
+  }
+
 }
 
-/* Platform card upgrades */
-.socialGrid .card {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid #254760;
-  background: linear-gradient(
-    135deg, #101b30, #070b16 75%
-  );
-  box-shadow: 0 10px 25px #0005;
+
+/* =========================================================
+   5. LOGO — KEEP ORIGINAL IMAGE
+========================================================= */
+
+.logoShell{
+  transition:
+    transform .35s ease,
+    filter .35s ease;
+
+  filter:
+    drop-shadow(
+      0 0 14px rgba(0,229,255,.22)
+    );
 }
 
-.socialGrid .card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    110deg,
-    transparent 25%,
-    #00e5ff16 50%,
-    transparent 75%
-  );
-  transform: translateX(-130%);
-  transition: transform .7s ease;
-  pointer-events: none;
+.logoShell:hover{
+  transform:scale(1.04);
+
+  filter:
+    drop-shadow(
+      0 0 25px rgba(0,229,255,.38)
+    );
 }
 
-.socialGrid .card:hover::before {
-  transform: translateX(130%);
+.logo{
+  transition:
+    transform .35s ease,
+    filter .35s ease;
 }
 
-.socialGrid .card:hover {
-  border-color: #00e5ff !important;
+.logo:hover{
+  transform:scale(1.025);
+
+  filter:
+    brightness(1.08)
+    saturate(1.12);
+}
+
+
+/* =========================================================
+   6. NOTICE / LIVE / ADMIN PANELS
+========================================================= */
+
+.notice,
+.livePanel,
+.adminPanel,
+.videoUpdate,
+.aboutItem{
+
+  position:relative;
+
+  border-color:
+    rgba(0,229,255,.16) !important;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(10,20,36,.96),
+      rgba(4,8,16,.97)
+    ) !important;
+
   box-shadow:
-    0 15px 35px #0009,
-    0 0 22px #00e5ff33;
+    0 15px 35px rgba(0,0,0,.20);
+
 }
 
-/* Animated buttons */
-.btn, .quick a {
+
+/* =========================================================
+   7. SOCIAL PLATFORM CARDS
+========================================================= */
+
+.socialGrid .card{
+
+  position:relative;
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(13,27,47,.97),
+      rgba(5,9,18,.98)
+    ) !important;
+
+  border:
+    1px solid
+    rgba(0,229,255,.16) !important;
+
+  box-shadow:
+    0 14px 30px
+    rgba(0,0,0,.28);
+
+  transition:
+    transform .28s ease,
+    border-color .28s ease,
+    box-shadow .28s ease !important;
+}
+
+
+/* Neon shine */
+
+.socialGrid .card::before{
+
+  content:"";
+
+  position:absolute;
+
+  top:-60%;
+  left:-80%;
+
+  width:45%;
+  height:220%;
+
+  transform:
+    rotate(22deg)
+    translateX(-250%);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.09),
+      rgba(0,229,255,.18),
+      transparent
+    );
+
+  transition:
+    transform .8s ease;
+
+  pointer-events:none;
+}
+
+
+/* Small glow */
+
+.socialGrid .card::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:120px;
+  height:120px;
+
+  right:-70px;
+  bottom:-80px;
+
+  border-radius:50%;
+
+  background:
+    rgba(0,229,255,.09);
+
+  filter:blur(35px);
+
+  pointer-events:none;
+}
+
+
+.socialGrid .card:hover{
+
+  transform:
+    translateY(-6px)
+    scale(1.012) !important;
+
+  border-color:
+    rgba(0,229,255,.65) !important;
+
+  box-shadow:
+    0 18px 40px rgba(0,0,0,.40),
+    0 0 22px rgba(0,229,255,.10);
+}
+
+
+.socialGrid .card:hover::before{
+
+  transform:
+    rotate(22deg)
+    translateX(600%);
+
+}
+
+
+/* =========================================================
+   8. PLATFORM ICON
+========================================================= */
+
+.pIcon{
+
+  transition:
+    transform .28s ease,
+    border-color .28s ease,
+    box-shadow .28s ease;
+
+}
+
+.card:hover .pIcon{
+
+  transform:
+    scale(1.08)
+    rotate(-3deg);
+
+  border-color:
+    rgba(0,229,255,.55);
+
+  box-shadow:
+    0 0 18px
+    rgba(0,229,255,.13);
+
+}
+
+
+/* =========================================================
+   9. BUTTONS
+========================================================= */
+
+.btn,
+.quick a,
+.langBtn,
+.adminEntry button{
+
+  position:relative;
+  overflow:hidden;
+
+  transition:
+    transform .22s ease,
+    box-shadow .22s ease,
+    border-color .22s ease !important;
+}
+
+
+.btn:hover,
+.quick a:hover,
+.langBtn:hover,
+.adminEntry button:hover{
+
+  transform:
+    translateY(-3px);
+
+  border-color:
+    rgba(0,229,255,.65) !important;
+
+  box-shadow:
+    0 8px 20px
+    rgba(0,229,255,.10);
+
+}
+
+
+.btn:active,
+.quick a:active,
+.langBtn:active,
+.adminEntry button:active{
+
+  transform:
+    scale(.95);
+
+}
+
+
+/* =========================================================
+   10. LIVE PANEL
+========================================================= */
+
+.livePanel{
+
+  overflow:hidden;
+
+  box-shadow:
+    0 16px 40px rgba(0,0,0,.25),
+    0 0 25px rgba(0,229,255,.05);
+
+}
+
+.liveLabel{
+
+  animation:
+    auraLivePulse
+    2.2s ease-in-out infinite;
+
+}
+
+@keyframes auraLivePulse{
+
+  0%,100%{
+    opacity:.75;
+  }
+
+  50%{
+    opacity:1;
+
+    text-shadow:
+      0 0 10px
+      rgba(255,65,105,.6);
+  }
+
+}
+
+
+/* =========================================================
+   11. ABOUT ITEMS
+========================================================= */
+
+.aboutItem{
+
+  transition:
+    transform .28s ease,
+    border-color .28s ease,
+    box-shadow .28s ease;
+
+}
+
+.aboutItem:hover{
+
+  transform:
+    translateY(-5px);
+
+  border-color:
+    rgba(0,229,255,.45) !important;
+
+  box-shadow:
+    0 12px 30px
+    rgba(0,0,0,.30);
+
+}
+
+
+/* =========================================================
+   12. ONE-TIME SCROLL REVEAL
+========================================================= */
+
+.auraReveal{
+
+  opacity:0;
+
+  transition:
+    opacity .75s ease,
+    transform .75s
+    cubic-bezier(.2,.75,.25,1);
+
+  will-change:
+    transform,
+    opacity;
+
+}
+
+
+/* LEFT */
+
+.auraFromLeft{
+
+  transform:
+    translate3d(-55px,0,0);
+
+}
+
+
+/* RIGHT */
+
+.auraFromRight{
+
+  transform:
+    translate3d(55px,0,0);
+
+}
+
+
+/* TOP */
+
+.auraFromTop{
+
+  transform:
+    translate3d(0,-45px,0);
+
+}
+
+
+/* BOTTOM */
+
+.auraFromBottom{
+
+  transform:
+    translate3d(0,45px,0);
+
+}
+
+
+/* ZOOM */
+
+.auraZoom{
+
+  transform:
+    scale(.94);
+
+}
+
+
+/* FINAL POSITION */
+
+.auraReveal.auraShow{
+
+  opacity:1;
+
+  transform:
+    translate3d(0,0,0)
+    scale(1);
+
+}
+
+
+/* =========================================================
+   13. INTRO SCREEN
+========================================================= */
+
+#auraIntro{
+
+  position:fixed;
+  inset:0;
+
+  z-index:999999;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:25px;
+
+  background:
+
+    radial-gradient(
+      circle at 50% 38%,
+      #08243c 0%,
+      #02070e 38%,
+      #000 75%
+    );
+
+  transition:
+    opacity .65s ease,
+    visibility .65s ease;
+
+}
+
+
+#auraIntro.auraIntroHide{
+
+  opacity:0;
+  visibility:hidden;
+
+  pointer-events:none;
+
+}
+
+
+.auraIntroBox{
+
+  width:min(560px,94%);
+
+  text-align:center;
+
+  transform:
+    translateY(10px);
+
+  animation:
+    introBoxIn
+    .7s ease forwards;
+
+}
+
+
+@keyframes introBoxIn{
+
+  to{
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+/* Intro logo */
+
+.auraIntroLogo{
+
+  width:105px;
+  height:105px;
+
+  margin:
+    0 auto 24px;
+
+  border-radius:50%;
+
+  display:grid;
+  place-items:center;
+
+  border:
+    1px solid
+    rgba(0,229,255,.7);
+
+  box-shadow:
+    0 0 30px
+    rgba(0,229,255,.18);
+
+  animation:
+    introLogoFloat
+    3s ease-in-out infinite;
+
+}
+
+
+.auraIntroLogo img{
+
+  width:88px;
+  height:88px;
+
+  object-fit:cover;
+
+  border-radius:50%;
+
+}
+
+
+@keyframes introLogoFloat{
+
+  0%,100%{
+    transform:
+      translateY(0);
+  }
+
+  50%{
+    transform:
+      translateY(-7px);
+  }
+
+}
+
+
+/* Intro small text */
+
+.auraIntroSmall{
+
+  color:
+    var(--aura-cyan);
+
+  font-size:12px;
+
+  font-weight:900;
+
+  letter-spacing:3px;
+
+  margin-bottom:10px;
+
+}
+
+
+/* Intro title */
+
+.auraIntroTitle{
+
+  margin:0;
+
+  font-size:
+    clamp(31px,7vw,55px);
+
+  line-height:1;
+
+  letter-spacing:1px;
+
+  color:white;
+
+  text-shadow:
+    0 0 25px
+    rgba(0,229,255,.18);
+
+}
+
+
+/* Intro subtitle */
+
+.auraIntroText{
+
+  margin:
+    15px auto 22px;
+
+  max-width:470px;
+
+  color:#aebed1;
+
+  font-size:14px;
+
+  line-height:1.7;
+
+}
+
+
+/* Enter button */
+
+.auraEnterBtn{
+
+  border:
+    1px solid
+    rgba(0,229,255,.65);
+
+  background:
+    rgba(0,229,255,.06);
+
+  color:#fff;
+
+  padding:
+    12px 25px;
+
+  border-radius:999px;
+
+  cursor:pointer;
+
+  font-size:13px;
+
+  font-weight:900;
+
+  letter-spacing:.5px;
+
   transition:
     transform .25s ease,
-    box-shadow .25s ease,
-    border-color .25s ease;
+    background .25s ease,
+    box-shadow .25s ease;
+
 }
 
-.btn:hover, .quick a:hover {
-  transform: translateY(-4px) scale(1.025);
-  box-shadow: 0 0 20px #00e5ff30;
+
+.auraEnterBtn:hover{
+
+  transform:
+    translateY(-3px);
+
+  background:
+    rgba(0,229,255,.12);
+
+  box-shadow:
+    0 0 25px
+    rgba(0,229,255,.16);
+
 }
 
-.btn:active, .quick a:active {
-  transform: scale(.95);
+
+.auraEnterBtn:active{
+
+  transform:
+    scale(.95);
+
 }
 
-/* Glow for upcoming live */
-.livePanel {
-  border: 1px solid #00e5ff55;
-  box-shadow: 0 0 30px #00e5ff0c;
+
+/* =========================================================
+   14. SCROLL PROGRESS BAR
+========================================================= */
+
+#auraProgress{
+
+  position:fixed;
+
+  left:0;
+  top:0;
+
+  width:0;
+  height:2px;
+
+  z-index:999998;
+
+  background:
+    linear-gradient(
+      90deg,
+      #00e5ff,
+      #008cff,
+      #8b5cf6
+    );
+
+  box-shadow:
+    0 0 10px
+    rgba(0,229,255,.6);
+
+  pointer-events:none;
+
 }
 
-.liveLabel {
-  animation: liveGlow 2s ease-in-out infinite;
-}
 
-@keyframes liveGlow {
-  50% {
-    text-shadow: 0 0 15px #ff376b;
-  }
-}
+/* =========================================================
+   15. BACK TO TOP
+========================================================= */
 
-/* Directional entry animations */
-.aura-enter {
-  opacity: 0 !important;
-  animation: none !important;
+#auraTopBtn{
+
+  position:fixed;
+
+  right:18px;
+  bottom:18px;
+
+  width:45px;
+  height:45px;
+
+  border-radius:50%;
+
+  border:
+    1px solid
+    rgba(0,229,255,.35);
+
+  background:
+    rgba(5,13,25,.88);
+
+  color:#fff;
+
+  display:grid;
+  place-items:center;
+
+  font-size:18px;
+
+  cursor:pointer;
+
+  z-index:900;
+
+  opacity:0;
+
+  transform:
+    translateY(15px);
+
+  pointer-events:none;
+
   transition:
-    opacity .8s ease,
-    translate .8s cubic-bezier(.2,.8,.2,1),
-    scale .8s ease !important;
+    opacity .25s ease,
+    transform .25s ease,
+    border-color .25s ease;
+
+  backdrop-filter:
+    blur(8px);
+
 }
 
-.aura-enter[data-direction="left"] {
-  translate: -65px 0;
-}
-.aura-enter[data-direction="right"] {
-  translate: 65px 0;
-}
-.aura-enter[data-direction="top"] {
-  translate: 0 -65px;
-}
-.aura-enter[data-direction="bottom"] {
-  translate: 0 65px;
+
+#auraTopBtn.show{
+
+  opacity:1;
+
+  transform:
+    translateY(0);
+
+  pointer-events:auto;
+
 }
 
-.aura-enter.aura-visible {
-  opacity: 1 !important;
-  translate: 0 0 !important;
+
+#auraTopBtn:hover{
+
+  border-color:
+    #00e5ff;
+
+  transform:
+    translateY(-3px);
+
 }
 
-@media (max-width: 650px) {
-  .aura-enter[data-direction="left"] {
-    translate: -24px 0;
+
+/* =========================================================
+   16. MOBILE OPTIMIZATION
+========================================================= */
+
+@media(max-width:650px){
+
+  body::after{
+    width:320px;
+    height:320px;
   }
-  .aura-enter[data-direction="right"] {
-    translate: 24px 0;
+
+
+  .socialGrid .card:hover{
+
+    transform:
+      translateY(-3px) !important;
+
   }
+
+
+  .auraFromLeft{
+
+    transform:
+      translate3d(-25px,0,0);
+
+  }
+
+
+  .auraFromRight{
+
+    transform:
+      translate3d(25px,0,0);
+
+  }
+
+
+  .auraFromTop{
+
+    transform:
+      translate3d(0,-25px,0);
+
+  }
+
+
+  .auraFromBottom{
+
+    transform:
+      translate3d(0,25px,0);
+
+  }
+
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .aura-enter {
-    opacity: 1 !important;
-    translate: none !important;
-    transition: none !important;
+
+/* =========================================================
+   17. ACCESSIBILITY / LOW MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+
+    animation-duration:
+      .01ms !important;
+
+    animation-iteration-count:
+      1 !important;
+
+    transition-duration:
+      .01ms !important;
+
   }
+
+
+  .auraReveal{
+
+    opacity:1 !important;
+
+    transform:none !important;
+
+  }
+
 }
+
 </style>
 
+
 <script>
-(() => {
-  const directions = [
-    "left", "right", "top", "bottom"
+
+(function(){
+
+"use strict";
+
+
+/* =========================================================
+   AURA GAMES PRO V2
+========================================================= */
+
+
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+
+/* =========================================================
+   1. INTRO SCREEN
+========================================================= */
+
+const intro =
+document.createElement("div");
+
+intro.id = "auraIntro";
+
+
+/*
+Use the same logo already present
+on the website.
+
+No second image link is required.
+*/
+
+const currentLogo =
+document.querySelector(".logo");
+
+const logoSource =
+currentLogo
+? currentLogo.src
+: "";
+
+
+intro.innerHTML = `
+
+<div class="auraIntroBox">
+
+  <div class="auraIntroLogo">
+
+    ${
+      logoSource
+      ? `<img src="${logoSource}" alt="AURA GAMES">`
+      : `AG`
+    }
+
+  </div>
+
+
+  <div class="auraIntroSmall">
+    OFFICIAL GAMING HUB
+  </div>
+
+
+  <h2 class="auraIntroTitle">
+    WELCOME TO
+    <br>
+    AURA_GAMES_01
+  </h2>
+
+
+  <p class="auraIntroText">
+    Gaming • Live Streams •
+    Free Fire • Roblox •
+    Creator Updates
+  </p>
+
+
+  <button
+    class="auraEnterBtn"
+    id="auraEnterBtn"
+    type="button"
+  >
+    ENTER WEBSITE →
+  </button>
+
+</div>
+
+`;
+
+
+document.body.appendChild(intro);
+
+
+const enterBtn =
+document.getElementById(
+"auraEnterBtn"
+);
+
+
+function closeAuraIntro(){
+
+  intro.classList.add(
+    "auraIntroHide"
+  );
+
+
+  setTimeout(
+    function(){
+
+      intro.remove();
+
+    },
+    700
+  );
+
+}
+
+
+enterBtn.addEventListener(
+"click",
+closeAuraIntro
+);
+
+
+/*
+Click/tap anywhere on the
+background also enters.
+*/
+
+intro.addEventListener(
+"click",
+function(event){
+
+  if(event.target === intro){
+
+    closeAuraIntro();
+
+  }
+
+}
+);
+
+
+/*
+Keyboard support
+*/
+
+document.addEventListener(
+"keydown",
+function(event){
+
+  if(
+    event.key === "Enter" ||
+    event.key === "Escape"
+  ){
+
+    if(
+      document.getElementById(
+        "auraIntro"
+      )
+    ){
+
+      closeAuraIntro();
+
+    }
+
+  }
+
+}
+);
+
+
+/* =========================================================
+   2. SCROLL PROGRESS BAR
+========================================================= */
+
+const progress =
+document.createElement("div");
+
+progress.id =
+"auraProgress";
+
+document.body.appendChild(
+progress
+);
+
+
+/* =========================================================
+   3. BACK TO TOP BUTTON
+========================================================= */
+
+const topButton =
+document.createElement(
+"button"
+);
+
+topButton.id =
+"auraTopBtn";
+
+topButton.type =
+"button";
+
+topButton.setAttribute(
+"aria-label",
+"Back to top"
+);
+
+topButton.innerHTML =
+"↑";
+
+document.body.appendChild(
+topButton
+);
+
+
+topButton.addEventListener(
+"click",
+function(){
+
+  window.scrollTo({
+
+    top:0,
+    behavior:"smooth"
+
+  });
+
+}
+);
+
+
+/* =========================================================
+   4. ONE-TIME SCROLL ANIMATIONS
+========================================================= */
+
+const animationDirections = [
+
+  "auraFromLeft",
+  "auraFromRight",
+  "auraFromTop",
+  "auraFromBottom",
+  "auraZoom"
+
+];
+
+
+const revealSelectors = [
+
+  ".sectionHead",
+
+  ".quick a",
+
+  ".livePanel",
+
+  ".socialGrid .card",
+
+  ".aboutItem",
+
+  ".videoUpdate",
+
+  ".notice"
+
+].join(",");
+
+
+const elements =
+document.querySelectorAll(
+revealSelectors
+);
+
+
+elements.forEach(
+function(element,index){
+
+
+  /*
+  Prevent duplicate animation setup.
+  */
+
+  if(
+    element.dataset
+    .auraAnimated === "yes"
+  ){
+
+    return;
+
+  }
+
+
+  element.dataset
+  .auraAnimated = "yes";
+
+
+  element.classList.add(
+    "auraReveal"
+  );
+
+
+  const direction =
+  animationDirections[
+    index %
+    animationDirections.length
   ];
 
-  const selector = [
-    ".socialGrid .card",
-    ".quick a",
-    ".aboutItem",
-    ".videoUpdate",
-    ".sectionHead",
-    ".livePanel"
-  ].join(",");
 
-  const reduceMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
+  element.classList.add(
+    direction
+  );
 
-  if (reduceMotion) return;
 
-  const observer = "IntersectionObserver" in window
-    ? new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("aura-visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      }, {
-        threshold: 0.08,
-        rootMargin: "0px 0px -20px 0px"
-      })
-    : null;
+  /*
+  Slight stagger.
+  Maximum delay kept low
+  for smooth performance.
+  */
 
-  function animateElements() {
-    document.querySelectorAll(selector).forEach((el, i) => {
-      if (el.dataset.auraReady) return;
+  const delay =
+  (index % 4) * 70;
 
-      el.dataset.auraReady = "yes";
-      el.dataset.direction =
-        directions[i % directions.length];
 
-      el.classList.add("aura-enter");
+  element.style
+  .transitionDelay =
+  delay + "ms";
 
-      if (observer) {
-        observer.observe(el);
-      } else {
-        el.classList.add("aura-visible");
+}
+);
+
+
+/* =========================================================
+   5. INTERSECTION OBSERVER
+========================================================= */
+
+if(
+  "IntersectionObserver"
+  in window
+){
+
+  const observer =
+  new IntersectionObserver(
+
+  function(entries){
+
+    entries.forEach(
+    function(entry){
+
+
+      if(
+        entry.isIntersecting
+      ){
+
+        entry.target
+        .classList.add(
+          "auraShow"
+        );
+
+
+        /*
+        IMPORTANT:
+
+        Stop observing after
+        first animation.
+
+        Therefore when user
+        scrolls back up,
+        animation does NOT
+        restart.
+        */
+
+        observer.unobserve(
+          entry.target
+        );
+
       }
+
     });
+
+  },
+
+  {
+
+    threshold:.10,
+
+    rootMargin:
+    "0px 0px -30px 0px"
+
   }
-  animateElements();
-  // Supports newly added live updates
-  const watch = new MutationObserver(() => {
-    animateElements();
+
+  );
+
+
+  elements.forEach(
+  function(element){
+
+    observer.observe(
+      element
+    );
+
   });
-  watch.observe(document.body, {
-    childList: true,
-    subtree: true
+
+
+}else{
+
+
+  /*
+  Old browser fallback
+  */
+
+  elements.forEach(
+  function(element){
+
+    element.classList.add(
+      "auraShow"
+    );
+
   });
+
+}
+
+
+/* =========================================================
+   6. SCROLL HANDLER
+========================================================= */
+
+let ticking = false;
+
+
+function updateScrollUI(){
+
+
+  const scrollTop =
+  window.pageYOffset ||
+  document.documentElement
+  .scrollTop;
+
+
+  const scrollHeight =
+
+  document.documentElement
+  .scrollHeight -
+
+  document.documentElement
+  .clientHeight;
+
+
+  const percentage =
+
+  scrollHeight > 0
+
+  ? (
+      scrollTop /
+      scrollHeight
+    ) * 100
+
+  : 0;
+
+
+  progress.style.width =
+  percentage + "%";
+
+
+  if(
+    scrollTop > 450
+  ){
+
+    topButton.classList.add(
+      "show"
+    );
+
+  }else{
+
+    topButton.classList.remove(
+      "show"
+    );
+
+  }
+
+
+  ticking = false;
+
+}
+
+
+window.addEventListener(
+"scroll",
+function(){
+
+  if(!ticking){
+
+    window.requestAnimationFrame(
+      updateScrollUI
+    );
+
+    ticking = true;
+
+  }
+
+},
+
+{
+  passive:true
+}
+
+);
+
+
+updateScrollUI();
+
+
+/* =========================================================
+   7. BUTTON CLICK FEEDBACK
+========================================================= */
+
+const buttons =
+document.querySelectorAll(
+".btn, .quick a, .langBtn"
+);
+
+
+buttons.forEach(
+function(button){
+
+  button.addEventListener(
+  "pointerdown",
+  function(){
+
+    this.style.transform =
+    "scale(.96)";
+
+  });
+
+
+  button.addEventListener(
+  "pointerup",
+  function(){
+
+    this.style.transform =
+    "";
+
+  });
+
+
+  button.addEventListener(
+  "pointerleave",
+  function(){
+
+    this.style.transform =
+    "";
+
+  });
+
+});
+
+
+/* =========================================================
+   FINISHED
+========================================================= */
+
+});
+
+
 })();
+
 </script>
-<!-- END AURA ANIMATION UPGRADE -->
+
+
+<!-- =========================================================
+     AURA GAMES 01 — PRO V2 END
+========================================================= -->
 </body></html>
